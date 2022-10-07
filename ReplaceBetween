@@ -1,0 +1,25 @@
+function ReplaceBetween($first, $last, $text, $str) {
+    $newStr = $str
+
+    while ($newStr.IndexOf("$first") -gt 0) {
+        
+        $start = $newStr.IndexOf("$first")
+        $end = $newStr.IndexOf("$last")
+        if ($start -gt $end) {
+            throw "Error, the last phrase was found before the start phrase."
+            }
+
+        if ($end -gt 0) {
+            #Can find both $first & last
+            $newStr = $newStr.substring(0, $start + $start.Length - 1) + $newStr.substring($end + $last.Length, ($newStr.Length - $end - $last.Length))
+            
+        } 
+        else {
+        Write-Host "couldn't find anymore matching pairs."
+        break
+        }
+
+    }
+    [System.GC]::Collect()
+    return $newStr
+}
